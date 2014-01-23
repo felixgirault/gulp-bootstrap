@@ -1,0 +1,18 @@
+{
+	"name": "Name",
+	"author": "Author",
+	"description": "Description",
+	"version": "0.0.0",
+	"devDependencies": {
+		"coffee-script": "*",
+		"coffee-lint": "*",
+		"gulp": "latest",
+		"gulp-util": "latest",
+		"gulp-coffee": "latest",
+		"gulp-coffeelint": "latest",
+		"gulp-wrap-define": "latest",
+		"gulp-concat": "latest",
+		"gulp-uglify": "latest",
+		"gulp-rename": "latest"
+	}
+}

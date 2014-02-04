@@ -63,13 +63,13 @@ gulp.task( 'lib', ( ) ->
 
 	gulp
 		.src( './lib/*.coffee' )
-		.pipe( coffeelint([
+		.pipe( coffeelint(
 			# if you like tabs and you know it
 			# indentation:
 			#	value: 1
 			# no_tabs:
 			#	level: ignore
-		]))
+		))
 		.pipe( coffeelint.reporter( ))
 		.pipe( coffee(
 			bare: true

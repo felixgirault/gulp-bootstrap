@@ -14,7 +14,7 @@ uglify = require( 'gulp-uglify' )
 builder = ( name ) ->
 	gutil.combine(
 		concat( "#{name}.js" )
-		gulp.dest( './dist/' )
+		gulp.dest( './dist' )
 		rename( "#{name}.min.js" )
 		uglify( )
 		gulp.dest( './dist' )
@@ -23,16 +23,13 @@ builder = ( name ) ->
 
 
 # default task
-gulp.task( 'default', ( ) ->
-	gulp.run( 'vendors' )
-	gulp.run( 'lib' )
-)
+gulp.task( 'default', [ 'vendors', 'lib' ])
 
 
 
 # watches changes in source files
 gulp.task( 'watch', ( ) ->
-	gulp.watch( './lib/*', ( ) -> gulp.run( 'lib' ))
+	gulp.watch( './lib/*', [ 'lib' ])
 )
 
 

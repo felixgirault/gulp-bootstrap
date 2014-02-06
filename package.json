@@ -6,6 +6,7 @@
 	"devDependencies": {
 		"coffee-script": "*",
 		"coffee-lint": "*",
+		"lazypipe": "latest",
 		"gulp": "latest",
 		"gulp-util": "latest",
 		"gulp-coffee": "latest",

@@ -1,6 +1,7 @@
 # basic gulpfile to build libraries with CoffeeScript and CommonJS
 gulp = require( 'gulp' )
 gutil = require( 'gulp-util' )
+lazypipe = require( 'lazypipe' )
 coffee = require( 'gulp-coffee' )
 coffeelint = require( 'gulp-coffeelint' )
 define = require( 'gulp-wrap-define' )
@@ -10,22 +11,8 @@ uglify = require( 'gulp-uglify' )
 
 
 
-# concatenates and builds files
-build = ( name ) ->
-	gutil.combine(
-		concat( "#{name}.js" )
-		gulp.dest( './dist' )
-		rename( "#{name}.min.js" )
-		uglify( )
-		gulp.dest( './dist' )
-	)( )
-
-
-
 # default task
 gulp.task( 'default', [ 'vendors', 'lib' ])
-
-
 
 # watches changes in source files
 gulp.task( 'watch', ( ) ->
@@ -33,6 +20,17 @@ gulp.task( 'watch', ( ) ->
 )
 
 
+
+# concatenates and builds files
+build = ( name ) ->
+	builder = lazypipe( )
+		.pipe( concat, "#{name}.js" )
+		.pipe( gulp.dest, './dist' )
+		.pipe( rename, "#{name}.min.js" )
+		.pipe( uglify )
+		.pipe( gulp.dest, './dist' )
+
+	builder( )
 
 # builds vendors files
 gulp.task( 'vendors', ( ) ->
@@ -49,8 +47,6 @@ gulp.task( 'vendors', ( ) ->
 		))
 		.pipe( build( 'vendors' ))
 )
-
-
 
 # builds library files
 gulp.task( 'lib', ( ) ->

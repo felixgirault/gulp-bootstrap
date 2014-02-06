@@ -11,14 +11,14 @@ uglify = require( 'gulp-uglify' )
 
 
 # concatenates and builds files
-builder = ( name ) ->
+build = ( name ) ->
 	gutil.combine(
 		concat( "#{name}.js" )
 		gulp.dest( './dist' )
 		rename( "#{name}.min.js" )
 		uglify( )
 		gulp.dest( './dist' )
-	)
+	)( )
 
 
 
@@ -36,8 +36,6 @@ gulp.task( 'watch', ( ) ->
 
 # builds vendors files
 gulp.task( 'vendors', ( ) ->
-	build = builder( 'vendors' )
-
 	gulp
 		.src([
 			'./bower_components/commonjs-require-definition/require.js'
@@ -49,15 +47,13 @@ gulp.task( 'vendors', ( ) ->
 			root: './lib'
 			define: 'require.register'
 		))
-		.pipe( build( ))
+		.pipe( build( 'vendors' ))
 )
 
 
 
 # builds library files
 gulp.task( 'lib', ( ) ->
-	build = builder( 'lib' )
-
 	gulp
 		.src( './lib/*.coffee' )
 		.pipe( coffeelint(
@@ -76,5 +72,5 @@ gulp.task( 'lib', ( ) ->
 			root: './lib'
 			define: 'require.register'
 		))
-		.pipe( build( ))
+		.pipe( build( 'lib' ))
 )
